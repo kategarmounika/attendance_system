@@ -1,0 +1,25 @@
+<a href="/download_report" class="btn btn-success mb-3">
+    Download PDF Report
+</a>
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>Attendance Report</h3>
+
+<table class="table table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Roll No</th>
+        <th>Attendance %</th>
+    </tr>
+
+    {% for student in report_data %}
+    <tr>
+        <td>{{ student.name }}</td>
+        <td>{{ student.roll_no }}</td>
+        <td>{{ student.percentage }} %</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

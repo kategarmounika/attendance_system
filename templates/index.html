@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="mb-4">📊 Dashboard</h2>
+
+<div class="row text-center">
+
+    <div class="col-md-3 mb-3">
+        <div class="card shadow-lg border-0">
+            <div class="card-body">
+                <h6 class="text-muted">Total Students</h6>
+                <h2 class="fw-bold text-primary">{{ total_students }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card shadow-lg border-0">
+            <div class="card-body">
+                <h6 class="text-muted">Total Attendance</h6>
+                <h2 class="fw-bold text-dark">{{ total_attendance }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card shadow-lg border-0 bg-success text-white">
+            <div class="card-body">
+                <h6>Present Today</h6>
+                <h2 class="fw-bold">{{ present_today }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card shadow-lg border-0 bg-danger text-white">
+            <div class="card-body">
+                <h6>Absent Today</h6>
+                <h2 class="fw-bold">{{ absent_today }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card shadow-lg border-0 bg-info text-white">
+            <div class="card-body">
+               <h6>Attendance %</h6>
+               <h2 class="fw-bold">{{ attendance_percentage }}%</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<h4 class="mt-4">📈 Attendance Chart</h4>
+<div class="text-center">
+    <img src="data:image/png;base64,{{ chart }}" class="img-fluid" style="max-width: 400px;">
+</div>
+
+<hr>
+
+<h4 class="mt-4">👩‍🎓 Student List</h4>
+
+<form method="GET" action="/" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="search" class="form-control"
+               placeholder="Search by name or roll number">
+        <button class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Roll No</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for student in students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.roll_no }}</td>
+            <td>
+                <a href="/edit/{{ student.id }}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="/delete/{{ student.id }}"
+                   class="btn btn-sm btn-danger"
+                   onclick="return confirm('Are you sure?')">
+                   Delete
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

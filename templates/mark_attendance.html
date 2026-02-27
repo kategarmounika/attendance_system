@@ -1,0 +1,36 @@
+@app.route('/mark', methods=['GET', 'POST'])
+def mark_attendance():
+    if 'user' not in session:
+        return redirect('/login')
+
+    conn = connect_db()
+
+    if request.method == 'POST':
+        students = conn.execute("SELECT * FROM students").fetchall()
+
+        today = str(date.today())
+
+        for student in students:
+            status = request.form.get(f"status_{student['id']}")
+
+            # 🔎 Check if already marked today
+            existing = conn.execute(
+                "SELECT * FROM attendance WHERE student_id=? AND date=?",
+                (student['id'], today)
+            ).fetchone()
+
+            if not existing:
+                conn.execute(
+                    "INSERT INTO attendance (student_id, date, status) VALUES (?, ?, ?)",
+                    (student['id'], today, status)
+                )
+
+        conn.commit()
+        conn.close()
+
+        return redirect('/report')
+
+    students = conn.execute("SELECT * FROM students").fetchall()
+    conn.close()
+
+    return render_template('mark_attendance.html', students=students)

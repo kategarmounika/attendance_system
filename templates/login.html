@@ -1,32 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Admin Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body class="bg-light">
 
-<div class="container mt-5">
-    <div class="card shadow p-4 mx-auto" style="max-width:400px;">
-        <h3 class="text-center mb-3">Admin Login</h3>
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="height:100vh;">
+        <div class="col-md-4">
 
-        {% if error %}
-        <div class="alert alert-danger">{{ error }}</div>
-        {% endif %}
+            <div class="card shadow-lg p-4">
+                <h3 class="text-center mb-4">Admin Login</h3>
 
-        <form method="POST">
-            <div class="mb-3">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control" required>
+                <!-- Error Message -->
+                {% if error %}
+                    <div class="alert alert-danger text-center">
+                        {{ error }}
+                    </div>
+                {% endif %}
+
+                <form method="POST">
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" name="username" class="form-control" placeholder="Enter username" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-dark w-100">
+                        Login
+                    </button>
+
+                </form>
             </div>
 
-            <div class="mb-3">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control" required>
-            </div>
-
-            <button class="btn btn-dark w-100">Login</button>
-        </form>
+        </div>
     </div>
 </div>
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Edit Attendance</title>
+</head>
+
+<body>
+
+<h2>Edit Attendance</h2>
+
+<form method="POST">
+
+Roll No:<br>
+<input type="text" name="roll_no" value="{{ student[1] }}" required><br><br>
+
+Name:<br>
+<input type="text" name="name" value="{{ student[2] }}" required><br><br>
+
+Date:<br>
+<input type="date" name="date" value="{{ student[3] }}" required><br><br>
+
+Status:<br>
+<select name="status">
+<option value="Present">Present</option>
+<option value="Absent">Absent</option>
+</select>
+
+<br><br>
+
+<button type="submit">Update</button>
+
+</form>
+
+<br>
+<a href="/">Back</a>
+
+</body>
+</html>

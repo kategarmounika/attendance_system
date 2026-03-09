@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="mb-4">📅 Monthly Attendance Report</h2>
+
+<form method="GET" action="/monthly_report">
+    <label>Select Month:</label>
+    <input type="month" name="month" required>
+    <button type="submit">Generate Report</button>
+</form>
+{% if selected_month %}
+    <a href="/download_monthly_excel?month={{ selected_month }}">
+        <button>Download Excel</button>
+    </a>
+{% endif %}
+{% if report %}
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Roll No</th>
+            <th>Total Days</th>
+            <th>Present Days</th>
+            <th>Attendance %</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in report %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.roll_no }}</td>
+            <td>{{ student.total_days }}</td>
+            <td>{{ student.present_days }}</td>
+            <td>{{ student.percentage }}%</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% endblock %}

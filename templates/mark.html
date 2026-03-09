@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="mb-4">📝 Mark Attendance</h2>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Roll No</th>
+            <th>Mark Attendance</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for student in students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.roll_no }}</td>
+            <td>
+                <form method="POST" action="/mark_attendance" class="d-flex gap-2">
+
+                    <input type="hidden" 
+                           name="student_id" 
+                           value="{{ student.id }}">
+
+                    <input type="radio" 
+                           name="status" 
+                           value="Present" required> Present
+
+                    <input type="radio" 
+                           name="status" 
+                           value="Absent"> Absent
+
+                    <button type="submit" 
+                            class="btn btn-success btn-sm">
+                        Save
+                    </button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
